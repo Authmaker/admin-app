@@ -1,6 +1,6 @@
 {
   "name": "authmaker-admin-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Small description for authmaker-admin-app goes here",
   "private": true,
   "directories": {

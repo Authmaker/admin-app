@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'authmaker-admin-app',
+    podModulePrefix: 'authmaker-admin-app/pods',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
