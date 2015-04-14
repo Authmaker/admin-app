@@ -3,9 +3,8 @@
   {{#each user in content}}
     <tr>
       <td>{{user.username}}</td>
-      <td>{{user.email}}</td>
       <td>
-        {{#if user.activated}} Active {{else}}[enable button here] {{/if}}
+        <button {{action "enableUser" user}}>Enable</button>
       </td>
     </tr>
   {{/each}}
