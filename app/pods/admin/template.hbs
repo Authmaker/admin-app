@@ -13,7 +13,11 @@
               <tr>
                 <td>{{user.username}}</td>
                 <td>
-                  <button class="btn blue" {{action "enableUser" user}}>Enable</button>
+                  {{#if user.confirmationSent}}
+                    Email sent <a href="javascript:void(0)" {{action "enableUser" user}}>resend</a>
+                  {{else}}
+                    <button class="btn blue" {{action "enableUser" user}}>Enable</button>
+                  {{/if}}
                 </td>
               </tr>
             {{/each}}
