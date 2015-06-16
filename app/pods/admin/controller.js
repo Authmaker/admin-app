@@ -14,7 +14,6 @@ export default Ember.ArrayController.extend({
         });
       }.bind(this))
       .then(null, function(err){
-        console.log(err);
         this.notifications.addNotification({
           message: 'Error: ' + err.responseText,
           type: 'error'
