@@ -1,1 +1,32 @@
-{{outlet}}
+{{#paper-nav-container open=drawerOpen classNames="ember-app"}}
+
+  {{#paper-sidenav classNames="md-sidenav-left md-whiteframe-z2" flex-layout="column" flex=true}}
+
+    {{#paper-toolbar}}
+      <div class="md-toolbar-tools">
+        <div class="logo">
+          <strong>Authmaker</strong>
+        </div>
+      </div>
+    {{/paper-toolbar}}
+
+    {{#paper-content}}
+      <nav class="sidenav">
+        <ul>
+          <li>{{#link-to "admin"}}Enable Users{{/link-to}}</li>
+        </ul>
+      </nav>
+    {{/paper-content}}
+  {{/paper-sidenav}}
+
+  {{#paper-content flex-layout="column" flex=true}}
+    {{outlet}}
+  {{/paper-content}}
+
+  <div class="notifications-container">
+      {{#each notification in notifications}}
+          {{notification-message notification=notification}}
+      {{/each}}
+  </div>
+
+{{/paper-nav-container}}
