@@ -7,7 +7,10 @@ var Router = Ember.Router.extend({
 
 
 Router.map(function() {
-  this.resource('admin');
+  this.resource('admin', function(){
+    this.route('enable');
+    this.route('view');
+  });
 });
 
 export default Router;

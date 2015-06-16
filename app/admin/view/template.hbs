@@ -1,0 +1,25 @@
+{{#paper-toolbar}}
+  <h2 class="md-toolbar-tools">
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    <span>View Users</span>
+    {{#paper-button raised=true action=(action "downloadCSV" content) class="right"}}Download Emails{{/paper-button}}
+  </h2>
+{{/paper-toolbar}}
+
+
+
+{{#paper-list}}
+  {{#each content key="id" as |user|}}
+    {{#paper-item}}
+      {{#paper-tile-left}}
+        <img src="{{user.gravatarHash}}" class="img__rounded">
+      {{/paper-tile-left}}
+
+      {{#paper-tile-content}}
+        <h3>{{user.username}}</h3>
+      {{/paper-tile-content}}
+    {{/paper-item}}
+  {{/each}}
+{{/paper-list}}
