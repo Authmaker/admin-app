@@ -1,0 +1,32 @@
+{{#paper-toolbar}}
+  <h2 class="md-toolbar-tools">
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    <span>User Admin</span>
+  </h2>
+{{/paper-toolbar}}
+
+
+
+{{#paper-list}}
+  {{#each content key="id" as |user|}}
+    {{#paper-item}}
+      {{#paper-tile-left}}
+        <img src="{{user.gravatarHash}}" class="img__rounded">
+      {{/paper-tile-left}}
+
+      {{#paper-tile-content}}
+
+        <h3>{{user.username}}</h3>
+        <p>
+          {{#if user.confirmationSent}}
+            Email sent {{#paper-button classNames="md-primary" action=(action 'enableUser' user)}}resend{{/paper-button}}
+          {{else}}
+            {{#paper-button raised=true classNames="md-primary" action=(action 'enableUser' user)}}Enable{{/paper-button}}
+          {{/if}}
+        </p>
+      {{/paper-tile-content}}
+    {{/paper-item}}
+  {{/each}}
+{{/paper-list}}

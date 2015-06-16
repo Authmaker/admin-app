@@ -2,8 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-    return this.store.find('user').then(function(users) {
-      return users;
-    });
+    return this.store.find('user', {enabled: true});
   }
 });

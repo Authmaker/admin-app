@@ -5,6 +5,12 @@ var Router = Ember.Router.extend({
   location: config.locationType
 });
 
-export default Router.map(function() {
-  this.route('admin');
+
+Router.map(function() {
+  this.resource('admin', function(){
+    this.route('enable');
+    this.route('view');
+  });
 });
+
+export default Router;
