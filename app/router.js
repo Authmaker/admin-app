@@ -10,6 +10,7 @@ Router.map(function() {
   this.resource('admin', function(){
     this.route('enable');
     this.route('view');
+    this.route('plans');
   });
 });
 
