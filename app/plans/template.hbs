@@ -7,19 +7,9 @@
   </h2>
 {{/paper-toolbar}}
 
-
-
 {{#paper-list}}
   {{#each content as |plan|}}
-    {{#colour-paper-item title=plan.name}}
-      <h3>{{plan.name}} <small>{{link-to 'edit' 'plans.edit' plan}}</small></h3>
-      <p>
-        {{#paper-chips readOnly=true content=plan.scopes as |item|}}
-          <strong>{{item.name}}</strong>
-          <em>({{item.description}})</em>
-        {{/paper-chips}}
-      </p>
-    {{/colour-paper-item}}
+    {{plan-list-item plan=plan editable=true}}
   {{/each}}
 {{/paper-list}}
 

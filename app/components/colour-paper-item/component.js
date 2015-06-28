@@ -6,7 +6,7 @@ export default Ember.Component.extend({
     if(!this.get('gravatarHash')){
       return;
     }
-    
+
     Ember.$.ajax({
       url: `https://en.gravatar.com/${this.get('gravatarHash')}.json`,
       dataType: 'jsonp'
@@ -16,6 +16,9 @@ export default Ember.Component.extend({
   }.on('init'),
 
   firstLetter: Ember.computed('title', function(){
+    if(!this.get('title')){
+      return;
+    }
     return this.get('title').capitalize().slice(0,1);
   })
 });

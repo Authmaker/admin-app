@@ -1,0 +1,9 @@
+{{#colour-paper-item title=plan.name}}
+  <h3>{{plan.name}} {{#if editable}} <small>{{link-to 'edit' 'plans.edit' plan}}</small>{{/if}}</h3>
+  <p>
+    {{#paper-chips readOnly=true content=plan.scopes as |item|}}
+      <strong>{{item.name}}</strong>
+      <em>({{item.description}})</em>
+    {{/paper-chips}}
+  </p>
+{{/colour-paper-item}}
