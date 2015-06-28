@@ -1,0 +1,28 @@
+{{#paper-toolbar}}
+  <h2 class="md-toolbar-tools">
+    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
+      {{paper-icon icon="menu"}}
+    {{/paper-sidenav-toggle}}
+    <span>Plans</span>
+  </h2>
+{{/paper-toolbar}}
+
+
+
+{{#paper-list}}
+  {{#each content as |plan|}}
+    {{#colour-paper-item title=plan.name}}
+      <h3>{{plan.name}} <small>{{link-to 'edit' 'plans.edit' plan}}</small></h3>
+      <p>
+        {{#paper-chips readOnly=true content=plan.scopes as |item|}}
+          <strong>{{item.name}}</strong>
+          <em>({{item.description}})</em>
+        {{/paper-chips}}
+      </p>
+    {{/colour-paper-item}}
+  {{/each}}
+{{/paper-list}}
+
+{{#paper-button classNames="md-fab md-primary bottom-right-button" action="createPlan"}} {{paper-icon icon="add" size=2 classNames="patch-size-2"}} {{/paper-button}}
+
+{{outlet}}

@@ -10,7 +10,11 @@ Router.map(function() {
   this.resource('admin', function(){
     this.route('enable');
     this.route('view');
-    this.route('plans');
+    this.resource('plans', function(){
+      this.route('new');
+      this.route('edit', {path: 'edit/:id'});
+    });
+    this.route('scopes');
   });
 });
 
