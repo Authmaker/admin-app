@@ -16,6 +16,18 @@ export default AccountCreateController.extend({
         });
       });
       this.transitionToRoute('accounts');
+    },
+
+    delete(){
+      this.get('model').deleteRecord();
+
+      if(window.confirm("Are you sure you want to delete this account?")){
+        this.get('model').save();
+        this.transitionToRoute('accounts');
+      } else {
+        this.get('model').rollbackAttributes();
+        this.transitionToRoute('accounts');
+      }
     }
   }
 });

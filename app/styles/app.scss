@@ -1,5 +1,7 @@
  @import 'ember-paper';
- @import 'margins.scss';
+ @import 'margins';
+ @import 'circles';
+ @import 'buttons';
 
  .menu-sidenav-toggle {
   font-size: 24px!important;
@@ -38,23 +40,6 @@
   height: 100%;
 }
 
-.circle {
-  border-radius: 30px;
-  border: 1px solid #ddd;
-  width: 48px;
-  height: 48px;
-  margin: 16px;
-}
-
-.circle--text {
-  text-align: center;
-  vertical-align: middle;
-  line-height: 48px;
-  color: #fff;
-  font-weight: bold;
-  font-size: larger;
-}
-
 .md-toolbar-tools .right {
   position: absolute;
   right: 10px;
@@ -74,47 +59,6 @@ md-input-group input {
   vertical-align: inherit;
 }
 
-.bottom-right-button {
-  position: absolute;
-  right: 23px;
-  bottom: 23px;
-}
-
 .edit-dialog md-dialog {
   min-width: 70%;
-}
-
-$alphabet: (
-  'A': 'red',
-  'B': 'pink',
-  'C': 'purple',
-  'D': 'deep-purple',
-  'E': 'indigo',
-  'F': 'blue',
-  'G': 'light-blue',
-  'H': 'cyan',
-  'I': 'teal',
-  'J': 'green',
-  'K': 'light-green',
-  'L': 'lime',
-  'M': 'yellow',
-  'N': 'amber',
-  'O': 'orange',
-  'P': 'deep-orange',
-  'Q': 'brown',
-  'R': 'blue-grey',
-  'S': 'grey',
-  'T': 'red',
-  'U': 'pink',
-  'V': 'purple',
-  'W': 'deep-purple',
-  'X': 'indigo',
-  'Y': 'blue',
-  'Z': 'light-blue'
-);
-
-@each $letter, $color in $alphabet {
-  .circle--#{$letter}{
-    background: color($color, '200');
-  }
 }
