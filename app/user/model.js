@@ -34,5 +34,5 @@ export default DS.Model.extend({
       promise: promise
     });
 
-  }),
+  })
 });
