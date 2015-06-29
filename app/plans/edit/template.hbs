@@ -1,12 +1,12 @@
 {{#paper-dialog title="Edit Plan" close="cancel" classNames="edit-dialog"}}
   <md-dialog-content>
     {{paper-text label="Name" value=model.name}}
-    <span>Permissions:</span>
+    <h4 class="a-margin__sm">Permissions:</h4>
     {{#paper-chips readOnly=false removeItem="removeScope" content=model.scopes as |item|}}
       <strong>{{item.name}}</strong>
       <em>({{item.description}})</em>
     {{/paper-chips}}
-    <span>Add Permissions:</span>
+    <h4 class="a-margin__sm">Add Permissions:</h4>
     {{#paper-list}}
       {{#each availablePermissions as |permission|}}
         <a {{action 'addScope' permission}}>

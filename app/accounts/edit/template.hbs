@@ -1,8 +1,19 @@
 {{#paper-dialog title="Edit Account" close="cancel" classNames="edit-dialog"}}
   <md-dialog-content>
     {{paper-text label="Name" value=model.name}}
+    <h4 class="a-margin__sm">Expiry:</h4>
+    {{#if model.planExpiryDate}}
+      {{#if editExpiry}}
+        {{view "select" content=numbers value=selectedNumber}}
+        {{view "select" content=timePeriods value=selectedTimePeriod}}
+      {{else}}
+        {{ago model.planExpiryDate}} <a {{action (action 'setEditExpiry' true)}}>{{paper-icon icon="cancel"}}</a>
+      {{/if}}
+    {{else}}
+      {{view "select" content=numbers value=selectedNumber}}
+      {{view "select" content=timePeriods value=selectedTimePeriod}}
+    {{/if}}
     <h3 class="a-margin__sm">Plan:</h3>
-
     {{#if model.plan}}
       {{#paper-button classNames="md-primary" action="removePlan"}}<small>remove</small>{{/paper-button}}
       {{plan-list-item plan=model.plan}}
