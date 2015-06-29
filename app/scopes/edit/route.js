@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    return this.store.find('plan', params.id);
+    return this.store.find('scope', params.id);
   },
 
   actions: {

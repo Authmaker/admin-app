@@ -1,44 +1,50 @@
-import AccountCreateController from 'authmaker-admin-app/accounts/new/controller';
+import Ember from 'ember';
 
-export default AccountCreateController.extend({
+export default Ember.Controller.extend({
+
   actions: {
+    cancel(){
+      this.transitionToRoute('scopes');
+    },
+
     save(){
       this.get('model').save().then(() => {
         this.notifications.addNotification({
           type: 'success',
           autoClear: true,
-          message: 'Account updated successfully'
+          message: 'Permission updated successfully'
         });
       }, (err) => {
         this.notifications.addNotification({
           type: 'error',
-          message: `Error while updating account ${err.responseText || err.message || err}`
+          message: `Error while updating permission ${err.responseText || err.message || err}`
         });
       });
-      this.transitionToRoute('accounts');
+
+      this.transitionToRoute('scopes');
     },
 
     delete(){
       this.get('model').deleteRecord();
 
-      if(window.confirm("Are you sure you want to delete this account?")){
+      if(window.confirm("Are you sure you want to delete this permission?")){
         this.get('model').save().then(() => {
           this.notifications.addNotification({
             type: 'success',
             autoClear: true,
-            message: 'Account deleted successfully'
+            message: 'Permission deleted successfully'
           });
         }, (err) => {
           this.notifications.addNotification({
             type: 'error',
-            message: `Error while deleting account ${err.responseText || err.message || err}`
+            message: `Error while deleting permission ${err.responseText || err.message || err}`
           });
         });
 
-        this.transitionToRoute('accounts');
+        this.transitionToRoute('scopes');
       } else {
         this.get('model').rollbackAttributes();
-        this.transitionToRoute('accounts');
+        this.transitionToRoute('scopes');
       }
     }
   }

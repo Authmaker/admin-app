@@ -9,7 +9,7 @@
 
 {{#paper-list}}
   {{#each content as |plan|}}
-    {{plan-list-item plan=plan editable=true}}
+    {{plan-list-item plan=plan editable=true editPlan=(action 'editPlan' plan)}}
   {{/each}}
 {{/paper-list}}
 

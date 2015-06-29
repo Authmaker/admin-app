@@ -5,13 +5,15 @@ export default Ember.Controller.extend({
   showDialog: false,
 
   actions: {
+    editPlan(plan) {
+      this.transitionToRoute('plans.edit', plan);
+    },
+
     createPlan() {
-      this.set('newPlan', this.store.createRecord('plan', {newSubscriptions: true}));
-      this.set('showDialog', true);
+      this.transitionToRoute('plans.new');
     },
 
     savePlan() {
-      this.send('closeDialog');
 
       this.notifications.addNotification({
         message: 'Creating Plan',
@@ -27,18 +29,12 @@ export default Ember.Controller.extend({
         });
       }, (err) => {
 
-        console.log(err);
-
         this.notifications.clearAll();
         this.notifications.addNotification({
           message: `Error saving plan: ${err.responseText || err}`,
           type: 'error'
         });
       });
-    },
-
-    closeDialog() {
-      this.set('showDialog', false);
     }
   }
 });
