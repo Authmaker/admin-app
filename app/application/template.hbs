@@ -15,6 +15,9 @@
         <ul>
           <li>{{#link-to "admin.enable"}}Enable Users{{/link-to}}</li>
           <li>{{#link-to "admin.view"}}View Users{{/link-to}}</li>
+          <li>{{#link-to "plans"}}Plans{{/link-to}}</li>
+          <li>{{#link-to "scopes"}}Permissions{{/link-to}}</li>
+          <li>{{#link-to "accounts"}}Accounts{{/link-to}}</li>
         </ul>
       </nav>
     {{/paper-content}}
@@ -24,8 +27,8 @@
     {{outlet}}
   {{/paper-content}}
 
-  <div class="notifications-container">
-      {{#each notification in notifications}}
+  <div class="c-notification__container">
+      {{#each notifications as |notification|}}
           {{notification-message notification=notification}}
       {{/each}}
   </div>

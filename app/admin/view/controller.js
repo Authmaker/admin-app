@@ -28,8 +28,8 @@ export default Ember.Controller.extend({
         return key;
 
         //TODO enable ember i18n
-        var translation = Ember.I18n.t(`csv.${key}`);
-        return translation.indexOf('Missing translation') === 0 ? key : translation;
+        // var translation = Ember.I18n.t(`csv.${key}`);
+        // return translation.indexOf('Missing translation') === 0 ? key : translation;
       }));
 
       var csv = csvData.join('\n');

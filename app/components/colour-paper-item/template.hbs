@@ -1,0 +1,17 @@
+{{#paper-item}}
+  {{#paper-tile-left}}
+    {{#unless hasImage}}
+      <div class="circle circle--text circle--{{firstLetter}}">{{firstLetter}}</div>
+    {{else}}
+      <img src="https://www.gravatar.com/avatar/{{gravatarHash}}" class="circle">
+    {{/unless}}
+  {{/paper-tile-left}}
+
+  {{#paper-tile-content}}
+    {{#if hasBlock}}
+      {{yield}}
+    {{else}}
+      <h3>{{title}}</h3>
+    {{/if}}
+  {{/paper-tile-content}}
+{{/paper-item}}

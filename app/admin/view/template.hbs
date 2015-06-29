@@ -12,14 +12,6 @@
 
 {{#paper-list}}
   {{#each content key="id" as |user|}}
-    {{#paper-item}}
-      {{#paper-tile-left}}
-        <img src="{{user.gravatarHash}}" class="img__rounded">
-      {{/paper-tile-left}}
-
-      {{#paper-tile-content}}
-        <h3>{{user.username}}</h3>
-      {{/paper-tile-content}}
-    {{/paper-item}}
+    {{colour-paper-item title=user.username gravatarHash=user.gravatarHash}}
   {{/each}}
 {{/paper-list}}

@@ -1,0 +1,9 @@
+{{#colour-paper-item title=scope.name}}
+  <h3>{{scope.name}} {{#if scope.paidFor}}{{paper-icon icon="shopping-cart"}} {{/if}}</h3>
+  {{#if editable}}
+    {{#paper-button classNames="md-primary" action=(action attrs.editScope)}}<small>edit</small>{{/paper-button}}
+  {{/if}}
+  <p>
+    {{scope.description}}
+  </p>
+{{/colour-paper-item}}

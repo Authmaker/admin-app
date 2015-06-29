@@ -1,0 +1,26 @@
+{{#paper-dialog title="Edit Plan" close="cancel" classNames="edit-dialog"}}
+  <md-dialog-content>
+    {{paper-text label="Name" value=model.name}}
+    <span>Permissions:</span>
+    {{#paper-chips readOnly=false removeItem="removeScope" content=model.scopes as |item|}}
+      <strong>{{item.name}}</strong>
+      <em>({{item.description}})</em>
+    {{/paper-chips}}
+    <span>Add Permissions:</span>
+    {{#paper-list}}
+      {{#each availablePermissions as |permission|}}
+        <a {{action 'addScope' permission}}>
+          {{#colour-paper-item title=permission.name}}
+            <h3>{{permission.name}}</h3>
+            <p>{{permission.description}}</p>
+          {{/colour-paper-item}}
+        </a>
+      {{/each}}
+    {{/paper-list}}
+    {{paper-checkbox label="Allow new subscriptions" checked=model.newSubscriptions}}
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    {{paper-button raised=true label="Save" classNames="md-primary" action="savePlan"}}
+  </div>
+{{/paper-dialog}}
