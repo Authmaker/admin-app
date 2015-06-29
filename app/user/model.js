@@ -17,7 +17,7 @@ export default DS.Model.extend({
 
   hasImage: Ember.computed('gravatarHash', function(){
 
-    var promise = new Ember.RSVP.Promise((resolve, reject) => {
+    var promise = new Ember.RSVP.Promise((resolve) => {
       if(!this.get('gravatarHash')){
         return resolve(false);
       }
@@ -26,7 +26,6 @@ export default DS.Model.extend({
         url: `https://en.gravatar.com/${this.get('gravatarHash')}.json`,
         dataType: 'jsonp'
       }).then(() => {
-        console.log("Resolving true");
         return resolve(true);
       });
     });
