@@ -1,4 +1,10 @@
 
+3.1.0 / 2015-06-30
+==================
+
+  * Merge pull request #6 from Authmaker/feature/planTime
+  * adding planExpiryDate to account
+
 3.0.0 / 2015-06-29
 ==================
 
