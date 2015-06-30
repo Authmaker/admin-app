@@ -1,8 +1,20 @@
 import AccountCreateController from 'authmaker-admin-app/accounts/new/controller';
+import moment from 'moment';
 
 export default AccountCreateController.extend({
+
   actions: {
+    setEditExpiry(value){
+      this.set('editExpiry', value);
+    },
+
     save(){
+
+      if(!this.get('model.planExpiryDate') || this.get('editExpiry')){
+        this.set('model.planExpiryDate', moment().add(this.get('selectedNumber'), this.get('selectedTimePeriod')).toDate());
+        this.set('editExpiry', false);
+      }
+
       this.get('model').save().then(() => {
         this.notifications.addNotification({
           type: 'success',

@@ -1,6 +1,13 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
+
+  selectedNumber: 1,
+  selectedTimePeriod: 'year',
+
+  numbers: [1,2,3,4],
+  timePeriods: ['day', 'week', 'month', 'year'],
 
   allPlans: Ember.computed(function(){
     return this.store.findAll('plan');
@@ -34,6 +41,8 @@ export default Ember.Controller.extend({
     },
 
     save(){
+
+      this.set('model.planExpiryDate', moment().add(this.get('selectedNumber'), this.get('selectedTimePeriod')).toDate());
 
       this.store.createRecord('account', this.get('model')).save().then(() => {
         this.notifications.addNotification({

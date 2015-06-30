@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     downloadCSV(content) {
-      var keysToExport = ['email'];
+      var keysToExport = ['id', 'email'];
       var csvData = content.map(function(row) {
         var rowString = "";
         var rows = 0;

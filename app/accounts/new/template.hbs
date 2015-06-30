@@ -1,6 +1,10 @@
 {{#paper-dialog title="Edit Account" close="cancel" classNames="edit-dialog"}}
   <md-dialog-content>
     {{paper-text label="Name" value=model.name}}
+    <h4 class="a-margin__sm">Expiry:</h4>
+    {{view "select" content=numbers value=selectedNumber}}
+    {{view "select" content=timePeriods value=selectedTimePeriod}}
+
     <h3 class="a-margin__sm">Plan:</h3>
 
     {{#if model.plan}}
