@@ -1,4 +1,11 @@
 
+3.2.0 / 2015-07-06
+==================
+
+  * Merge pull request #7 from Authmaker/feature/updatePaper
+  * updating the ember-paper version and fixing things after the upgrade
+  * fixing problem with menu drawer on mobile
+
 3.1.0 / 2015-06-30
 ==================
 
