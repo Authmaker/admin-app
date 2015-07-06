@@ -1,7 +1,7 @@
 {{#paper-dialog title="Edit Account" close="cancel" classNames="edit-dialog"}}
   <md-dialog-content>
     {{paper-text label="Name" value=model.name}}
-    <h4 class="a-margin__sm">Expiry:</h4>
+    <h4 class="margin-sm">Expiry:</h4>
     {{#if model.planExpiryDate}}
       {{#if editExpiry}}
         {{view "select" content=numbers value=selectedNumber}}
@@ -13,12 +13,12 @@
       {{view "select" content=numbers value=selectedNumber}}
       {{view "select" content=timePeriods value=selectedTimePeriod}}
     {{/if}}
-    <h3 class="a-margin__sm">Plan:</h3>
+    <h3 class="margin-sm">Plan:</h3>
     {{#if model.plan}}
       {{#paper-button classNames="md-primary" action="removePlan"}}<small>remove</small>{{/paper-button}}
       {{plan-list-item plan=model.plan}}
     {{else}}
-      <h3 class="a-margin__sm">Choose Plan:</h3>
+      <h3 class="margin-sm">Choose Plan:</h3>
       {{#paper-list}}
         {{#each availablePlans as |plan|}}
           <a {{action 'addPlan' plan}}>
@@ -28,7 +28,7 @@
       {{/paper-list}}
     {{/if}}
 
-    <h3 class="a-margin__sm">Users:</h3>
+    <h3 class="margin-sm">Users:</h3>
     {{#paper-chips readOnly=false removeItem="removeUser" content=model.users as |user|}}
       {{#if user.name}}
         <strong>{{user.name}}</strong>
@@ -38,7 +38,7 @@
       {{/if}}
     {{/paper-chips}}
 
-    <h3 class="a-margin__sm">Choose Users:</h3>
+    <h3 class="margin-sm">Choose Users:</h3>
     {{#paper-list}}
       {{#each availableUsers as |user|}}
         <a {{action 'addUser' user}}>

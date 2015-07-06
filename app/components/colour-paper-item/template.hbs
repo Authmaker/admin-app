@@ -1,17 +1,17 @@
 {{#paper-item}}
-  {{#paper-tile-left}}
-    {{#unless hasImage}}
-      <div class="circle circle--text circle--{{firstLetter}}">{{firstLetter}}</div>
-    {{else}}
-      <img src="https://www.gravatar.com/avatar/{{gravatarHash}}" class="circle">
-    {{/unless}}
-  {{/paper-tile-left}}
 
-  {{#paper-tile-content}}
+  {{#unless hasImage}}
+    <div class="circle circle--text circle--{{firstLetter}} md-icon">{{firstLetter}}</div>
+  {{else}}
+    <img src="https://www.gravatar.com/avatar/{{gravatarHash}}" class="circle md-icon">
+  {{/unless}}
+
+
+  <div class="md-list-item-text">
     {{#if hasBlock}}
       {{yield}}
     {{else}}
       <h3>{{title}}</h3>
     {{/if}}
-  {{/paper-tile-content}}
+  </div>
 {{/paper-item}}

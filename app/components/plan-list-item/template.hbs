@@ -1,8 +1,10 @@
-{{#colour-paper-item title=plan.name}}
-  <h3>{{plan.name}}</h3>
-  {{#if editable}}
-    {{#paper-button classNames="md-primary" action=(action attrs.editPlan)}}<small>edit</small>{{/paper-button}}
-  {{/if}}
+{{#colour-paper-item title=plan.name class="margin-xl"}}
+  <h3 class="margin-sm">{{plan.name}}
+    {{#if editable}}
+      <a href="javascript:void()" {{action attrs.editPlan}} >{{paper-icon icon="edit" size=1}}</a>
+    {{/if}}
+  </h3>
+
   <p>
     {{#paper-chips readOnly=true content=plan.scopes as |item|}}
       <strong>{{item.name}}</strong>
