@@ -11,15 +11,13 @@
     {{/paper-toolbar}}
 
     {{#paper-content}}
-      <nav class="sidenav">
-        <ul>
-          <li>{{#link-to "admin.enable"}}Enable Users{{/link-to}}</li>
-          <li>{{#link-to "admin.view"}}View Users{{/link-to}}</li>
-          <li>{{#link-to "plans"}}Plans{{/link-to}}</li>
-          <li>{{#link-to "scopes"}}Permissions{{/link-to}}</li>
-          <li>{{#link-to "accounts"}}Accounts{{/link-to}}</li>
-        </ul>
-      </nav>
+      {{#paper-list}}
+        {{#paper-item action=(action 'transitionTo' 'admin.enable') }}Enable Users{{/paper-item}}
+        {{#paper-item action=(action 'transitionTo' 'admin.view') }}View Users{{/paper-item}}
+        {{#paper-item action=(action 'transitionTo' 'plans') }}Plans{{/paper-item}}
+        {{#paper-item action=(action 'transitionTo' 'scopes') }}Permissions{{/paper-item}}
+        {{#paper-item action=(action 'transitionTo' 'accounts') }}Accounts{{/paper-item}}
+      {{/paper-list}}  
     {{/paper-content}}
   {{/paper-sidenav}}
 

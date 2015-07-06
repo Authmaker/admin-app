@@ -1,5 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  classNameBindings: [':ember-app']
+  classNameBindings: [':ember-app'],
+
+  actions: {
+    transitionTo(route){
+      this.transitionToRoute(route);
+    }
+  }
 });
