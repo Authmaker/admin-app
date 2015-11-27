@@ -1,4 +1,11 @@
 
+3.3.0 / 2015-11-27
+==================
+
+  * Merge pull request #8 from Authmaker/feature/stripePlan
+  * ember-cli upgrade
+  * adding stripe plan field for admin app plans
+
 3.2.0 / 2015-07-06
 ==================
 
