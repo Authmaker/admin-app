@@ -1,3 +1,15 @@
+3.4.1 / 2016-06-09
+==================
+  * missed changelogs
+
+3.4.0 / 2016-06-09
+==================
+  * Merge pull request #9 from Authmaker/feature/add-details-users-view
+  * (origin/feature/add-details-users-view, feature/add-details-users-view) formatting
+  * new format for title including email and display name
+  * align details alongside each other
+  * added details to enabled view.
+  * added displayName, companyName and contactNumber to enabled users view
 
 3.3.0 / 2015-11-27
 ==================
