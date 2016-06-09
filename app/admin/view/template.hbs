@@ -12,6 +12,11 @@
 
 {{#paper-list}}
   {{#each content key="id" as |user|}}
-    {{colour-paper-item title=user.username gravatarHash=user.gravatarHash}}
+    {{#colour-paper-item title=user.title gravatarHash=user.gravatarHash}}
+      <h3 class="margin-sm">{{user.title}}</h3>
+      {{#if user.companyName}}<p><strong>Company: </strong>{{user.companyName}}</p>{{/if}}
+      {{#if user.contactNumber}}<p><strong>Contact: </strong>{{user.contactNumber}}</p>{{/if}}
+      {{paper-divider inset=true}}
+    {{/colour-paper-item}}
   {{/each}}
 {{/paper-list}}
