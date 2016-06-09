@@ -8,14 +8,16 @@
   </h2>
 {{/paper-toolbar}}
 
-
-
 {{#paper-list}}
   {{#each content key="id" as |user|}}
-    {{#colour-paper-item title=user.title gravatarHash=user.gravatarHash}}
-      <h3 class="margin-sm">{{user.title}}</h3>
+    {{#colour-paper-item title=user.displayName gravatarHash=user.gravatarHash}}
+      {{#if user.displayName}}
+        <h3 class="margin-sm">{{user.displayName}} &lt;{{user.email}}&gt;</h3>
+      {{else}}
+        <h3 class="margin-sm">{{user.username}} &lt;{{user.email}}&gt;</h3>
+      {{/if}}
       <p>{{#if user.companyName}}<strong>Company: </strong>{{user.companyName}}{{/if}} {{#if user.contactNumber}}<strong>Contact: </strong>{{user.contactNumber}}{{/if}}</p>
-      {{paper-divider inset=true}}
     {{/colour-paper-item}}
+    {{paper-divider inset=true}}
   {{/each}}
 {{/paper-list}}
