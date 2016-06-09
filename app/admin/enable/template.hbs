@@ -13,8 +13,7 @@
   {{#each content key="id" as |user|}}
     {{#colour-paper-item title=user.title gravatarHash=user.gravatarHash class="margin-xl"}}
       <h3 class="margin-sm">{{user.title}}</h3>
-      {{#if user.companyName}}<p><strong>Company: </strong>{{user.companyName}}</p>{{/if}}
-      {{#if user.contactNumber}}<p><strong>Contact: </strong>{{user.contactNumber}}</p>{{/if}}
+      <p>{{#if user.companyName}}<strong>Company: </strong>{{user.companyName}}{{/if}} {{#if user.contactNumber}}<strong>Contact: </strong>{{user.contactNumber}}{{/if}}</p>
       {{#if user.confirmationSent}}
         Email sent {{#paper-button classNames="md-primary" action=(action 'enableUser' user)}}resend{{/paper-button}}
       {{else}}
