@@ -2,6 +2,9 @@ import DS from 'ember-data';
 import Ember from 'ember';
 
 export default DS.Model.extend({
+  displayName: DS.attr('string'),
+  companyName: DS.attr('string'),
+  contactNumber: DS.attr('string'),
   username: DS.attr('string'),
   email: DS.attr('string'),
   activated: DS.attr('Boolean'),
@@ -34,5 +37,9 @@ export default DS.Model.extend({
       promise: promise
     });
 
+  }),
+
+  title: Ember.computed('username', 'displayName', function(){
+    return this.get('displayName') || this.get('username');
   })
 });
