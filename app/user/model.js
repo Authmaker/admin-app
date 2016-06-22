@@ -5,6 +5,7 @@ export default DS.Model.extend({
   displayName: DS.attr('string'),
   companyName: DS.attr('string'),
   contactNumber: DS.attr('string'),
+  websiteUrl: DS.attr('string'),
   username: DS.attr('string'),
   email: DS.attr('string'),
   activated: DS.attr('Boolean'),
