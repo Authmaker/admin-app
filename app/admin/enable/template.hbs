@@ -4,6 +4,8 @@
       {{paper-icon icon="menu"}}
     {{/paper-sidenav-toggle}}
     <span>User Admin</span>
+
+    {{#paper-switch checked=showHidden class="right smaller-font"}}Show Hidden{{/paper-switch}}
   </h2>
 {{/paper-toolbar}}
 
@@ -31,6 +33,7 @@
       {{else}}
         {{#paper-button raised=true classNames="md-primary" action=(action 'enableUser' user)}}Enable{{/paper-button}}
       {{/if}}
+      {{#paper-button classNames="md-secondary" action=(action 'hideUser' user)}}Hide{{/paper-button}}
     {{/colour-paper-item}}
     {{paper-divider inset=true}}
   {{/each}}
