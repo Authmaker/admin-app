@@ -7,6 +7,6 @@ export default Ember.Route.extend({
     }
   },
   model: function(params) {
-    return this.store.find('user', {enabled: false, hidden: params.showHidden});
+    return this.store.query('user', {enabled: false, hidden: params.showHidden});
   }
 });

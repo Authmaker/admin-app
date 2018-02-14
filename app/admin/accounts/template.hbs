@@ -1,0 +1,13 @@
+{{#ember-wormhole to="title"}}&nbsp;- Accounts{{/ember-wormhole}}
+
+{{#paper-list}}
+  {{#each model as |account|}}
+    {{account-list-item account=account editAccount=(action 'editAccount' account)}}
+  {{/each}}
+{{/paper-list}}
+
+{{#paper-button raised=true fab=true iconButton=true classNames="md-primary bottom-right-button" onClick=(action "createAccount")}}
+  {{paper-icon "add"}}
+{{/paper-button}}
+
+{{outlet}}

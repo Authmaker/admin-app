@@ -1,33 +1,39 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = Ember.Router.extend({
-  location: config.locationType
+const Router = EmberRouter.extend({
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
 Router.map(function() {
-  this.resource('admin', function() {
+  this.route('admin', function() {
     this.route('enable');
     this.route('view');
-    this.resource('plans', function() {
+
+    this.route('plans', function() {
       this.route('new');
       this.route('edit', {
         path: 'edit/:id'
       });
     });
-    this.resource('scopes', function(){
+
+    this.route('scopes', function(){
       this.route('new');
       this.route('edit', {
         path: 'edit/:id'
       });
     });
-    this.resource('accounts', function() {
+
+    this.route('accounts', function() {
       this.route('new');
       this.route('edit', {
         path: 'edit/:id'
       });
     });
   });
+
+
 });
 
 export default Router;

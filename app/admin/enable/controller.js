@@ -1,34 +1,40 @@
 import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { get, set } from '@ember/object';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
+  notifications: service('notification-messages'),
+  ajax: service(),
 
   queryParams: ['showHidden'],
   showHidden: false,
 
   actions: {
     enableUser: function(user) {
-      return Ember.$.post('/api/admin/users/send_confirmation', {
-        id: user.get('id')
+      return get(this, 'ajax').request('/users/send_confirmation', {
+        method: 'POST',
+        data: {
+          id: get(user, 'id'),
+        }
       }).then(() => {
-        this.notifications.addNotification({
-          message: "Confirmation email sent to " + user.get('email'),
-          type: 'success',
+        get(this, 'notifications').success(`Confirmation email sent to ${get(user, 'email')}`, {
           autoClear: true
         });
       })
       .then(null, (err) => {
-        this.notifications.addNotification({
-          message: 'Error: ' + err.responseText,
-          type: 'error'
-        });
+        get(this, 'notifications').error(`Error: ${err.responseText}`);
       });
     },
 
     hideUser(user) {
-      return Ember.$.post('/api/admin/users/hide', {
-        id: user.get('id')
+      return get(this, 'ajax').request('/users/hide', {
+        method: 'POST',
+        data: {
+          id: get(user, 'id'),
+        }
       }).then(() => {
-        user.set('hidden', true);
+        set(user, 'hidden', true);
       })
       .then(null, (err) => {
         this.notifications.addNotification({

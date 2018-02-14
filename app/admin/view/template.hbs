@@ -1,15 +1,10 @@
-{{#paper-toolbar}}
-  <h2 class="md-toolbar-tools">
-    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
-      {{paper-icon icon="menu"}}
-    {{/paper-sidenav-toggle}}
-    <span>View Users</span>
-    {{#paper-button raised=true action=(action "downloadCSV" content) class="right"}}Download Emails{{/paper-button}}
-  </h2>
-{{/paper-toolbar}}
+{{#ember-wormhole to="title"}}&nbsp;- View Users{{/ember-wormhole}}
+{{#ember-wormhole to="tools"}}
+  {{#paper-button raised=true onClick=(action "downloadCSV" model) class="right"}}Download Emails{{/paper-button}}
+{{/ember-wormhole}}
 
 {{#paper-list}}
-  {{#each content key="id" as |user|}}
+  {{#each model as |user|}}
     {{#colour-paper-item title=user.displayName gravatarHash=user.gravatarHash}}
       {{#if user.displayName}}
         <h3 class="margin-sm">{{user.displayName}} &lt;{{user.email}}&gt;</h3>
