@@ -1,7 +1,7 @@
 {{#ember-wormhole to="title"}}&nbsp;- Plans{{/ember-wormhole}}
 
 {{#paper-list}}
-  {{#each model as |plan|}}
+  {{#each model.plans as |plan|}}
     {{plan-list-item plan=plan editable=true editPlan=(action 'editPlan' plan)}}
   {{/each}}
 {{/paper-list}}

@@ -1,40 +1,13 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-
-  showDialog: false,
-
+export default Controller.extend({
   actions: {
     editPlan(plan) {
-      this.transitionToRoute('plans.edit', plan);
+      this.transitionToRoute('admin.plans.edit', plan);
     },
 
     createPlan() {
-      this.transitionToRoute('plans.new');
+      this.transitionToRoute('admin.plans.new');
     },
-
-    savePlan() {
-
-      this.notifications.addNotification({
-        message: 'Creating Plan',
-        type: 'info'
-      });
-
-      this.get('newPlan').save().then(() => {
-        this.notifications.clearAll();
-        this.notifications.addNotification({
-          message: 'Plan saved successfully',
-          type: 'success',
-          autoClear: true
-        });
-      }, (err) => {
-
-        this.notifications.clearAll();
-        this.notifications.addNotification({
-          message: `Error saving plan: ${err.responseText || err}`,
-          type: 'error'
-        });
-      });
-    }
   }
 });

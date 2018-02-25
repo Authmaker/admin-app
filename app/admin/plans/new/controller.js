@@ -1,24 +1,25 @@
-import PlanEditController from '@authmaker/admin-app/plans/edit/controller';
+import Controller, { inject as controller } from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-export default PlanEditController.extend({
-
+export default Controller.extend({
+  plansController: controller('admin.plans'),
+  notifications: service('notification-messages'),
   actions: {
-    savePlan(){
+    cancel(){
+      this.transitionToRoute('admin.plans');
+    },
 
+    savePlan() {
       this.store.createRecord('plan', this.get('model')).save().then(() => {
-        this.notifications.addNotification({
-          type: 'success',
+        get(this, 'notifications').success('Plan created successfully', {
           autoClear: true,
-          message: 'Plan created successfully'
         });
-      }, (err) => {
-        this.notifications.addNotification({
-          type: 'error',
-          message: `Error while creating plan ${err.responseText || err.message || err}`
-        });
-      });
 
-      this.transitionToRoute('plans');
+        this.transitionToRoute('admin.plans');
+      }, (err) => {
+        get(this, 'notifications').error(`Error while creating plan ${err.responseText || err.message || err}`);
+      });
     }
   }
 });

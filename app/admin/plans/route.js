@@ -1,8 +1,11 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { hash } from 'rsvp';
 
 export default Route.extend({
   model: function() {
-    return this.store.findAll('plan').filter((plan) => !get(plan, 'isNew'));
+    return hash({
+      plans: this.store.findAll('plan'),
+      permissions: this.store.findAll('permission'),
+    });
   }
 });

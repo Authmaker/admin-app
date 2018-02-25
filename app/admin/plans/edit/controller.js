@@ -1,65 +1,40 @@
-import Ember from 'ember';
+import Controller, { inject as controller } from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-export default Ember.Controller.extend({
-
-  allScopes: Ember.computed(function(){
-    return this.store.findAll('scope');
-  }),
-
-  availablePermissions: Ember.computed.setDiff('allScopes', 'model.scopes'),
+export default Controller.extend({
+  plansController: controller('admin.plans'),
+  notifications: service('notification-messages'),
 
   actions: {
     cancel(){
-      this.transitionToRoute('plans');
-    },
-
-    addScope(scope){
-      this.get('model.scopes').pushObject(scope);
-    },
-
-    removeScope(scope){
-      this.get('model.scopes').removeObject(scope);
+      this.get('model').rollbackAttributes();
+      this.transitionToRoute('admin.plans');
     },
 
     savePlan(){
-
       this.get('model').save().then(() => {
-        this.notifications.addNotification({
-          type: 'success',
+        get(this, 'notifications').success('Plan updated successfully', {
           autoClear: true,
-          message: 'Plan updated successfully'
         });
-      }, (err) => {
-        this.notifications.addNotification({
-          type: 'error',
-          message: `Error while updating plan ${err.responseText || err.message || err}`
-        });
-      });
 
-      this.transitionToRoute('plans');
+        this.transitionToRoute('admin.plans');
+      }, (err) => {
+        get(this, 'notifications').error(`Error while updating plan ${err.responseText || err.message || err}`);
+      });
     },
 
     delete(){
-      this.get('model').deleteRecord();
-
       if(window.confirm("Are you sure you want to delete this plan?")){
-        this.get('model').save().then(() => {
-          this.notifications.addNotification({
-            type: 'success',
+        get(this, 'model').destroyRecord().then(() => {
+          get(this, 'notifications').success('Plan deleted successfully', {
             autoClear: true,
-            message: 'Plan deleted successfully'
           });
-        }, (err) => {
-          this.notifications.addNotification({
-            type: 'error',
-            message: `Error while deleting plan ${err.responseText || err.message || err}`
-          });
-        });
 
-        this.transitionToRoute('plans');
-      } else {
-        this.get('model').rollbackAttributes();
-        this.transitionToRoute('plans');
+          this.transitionToRoute('admin.plans');
+        }, (err) => {
+          get(this, 'notifications').error(`Error while deleting plan ${err.responseText || err.message || err}`);
+        });
       }
     }
   }

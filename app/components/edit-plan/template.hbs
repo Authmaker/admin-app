@@ -1,0 +1,40 @@
+{{#paper-dialog class="flex-gt-sm-50 flex-sm-70 flex-xs-90" onClose=(action attrs.cancel) clickOutsideToClose=true}}
+  <form>
+    {{#paper-toolbar}}
+      {{#paper-toolbar-tools}}
+        <h2>{{title}}</h2>
+        <span class="flex"></span>
+        {{#paper-button iconButton=true onClick=(action attrs.cancel)}}{{paper-icon icon="close"}}{{/paper-button}}
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+
+    {{#paper-dialog-content}}
+      <div class="layout layout-column layout-gt-sm-row layout-align-space-between-center">
+        {{paper-input class="flex-gt-sm-30" label="Name" value=model.name onChange=(action (mut model.name))}}
+        {{paper-input class="flex-gt-sm-30" label="Stripe Plan" value=model.stripePlan onChange=(action (mut model.stripePlan))}}
+        {{#paper-checkbox class="flex-gt-sm-30" value=model.newSubscriptions onChange=(action (mut model.newSubscriptions))}}
+          Allow new subscriptions
+        {{/paper-checkbox}}
+      </div>
+      {{#paper-chips
+        options=availablePermissions
+        searchField="name"
+        placeholder="Add Permissions"
+        removeItem=(action "removePermission")
+        addItem=(action "addPermission")
+        content=model.permissions
+        as |item|}}
+        <strong>{{item.name}}</strong>
+        <em>({{item.description}})</em>
+      {{/paper-chips}}
+    {{/paper-dialog-content}}
+
+    {{#paper-dialog-actions class="layout-row"}}
+      <span class="flex"></span>
+      {{#if attrs.delete}}
+        {{#paper-button classNames="md-warn" onClick=(action attrs.delete)}}<small>delete</small>{{/paper-button}}
+      {{/if}}
+      {{paper-button raised=true label="Save" classNames="md-primary" onClick=(action attrs.save)}}
+    {{/paper-dialog-actions}}
+  </form>
+{{/paper-dialog}}
