@@ -1,16 +1,12 @@
-{{#paper-toolbar}}
-  <h2 class="md-toolbar-tools">
-    {{#paper-sidenav-toggle class="menu-sidenav-toggle"}}
-      {{paper-icon icon="menu"}}
-    {{/paper-sidenav-toggle}}
-    <span>User Admin</span>
-
-    {{#paper-switch checked=showHidden class="right smaller-font"}}Show Hidden{{/paper-switch}}
-  </h2>
-{{/paper-toolbar}}
+{{#ember-wormhole to="title"}}&nbsp;- Enable Users{{/ember-wormhole}}
+{{#ember-wormhole to="tools"}}
+  {{#paper-switch value=showHidden onChange=(action (mut showHidden)) class="right smaller-font"}}
+    Show Hidden
+  {{/paper-switch}}
+{{/ember-wormhole}}
 
 {{#paper-list}}
-  {{#each content key="id" as |user|}}
+  {{#each model as |user|}}
     {{#colour-paper-item title=user.title gravatarHash=user.gravatarHash class="margin-xl"}}
       {{#if user.displayName}}
         <h3 class="margin-sm">{{user.displayName}} &lt;{{user.email}}&gt;</h3>
@@ -29,11 +25,11 @@
         {{/if}}
       </p>
       {{#if user.confirmationSent}}
-        Email sent {{#paper-button classNames="md-primary" action=(action 'enableUser' user)}}resend{{/paper-button}}
+        Email sent {{#paper-button classNames="md-primary" onClick=(action 'enableUser' user)}}resend{{/paper-button}}
       {{else}}
-        {{#paper-button raised=true classNames="md-primary" action=(action 'enableUser' user)}}Enable{{/paper-button}}
+        {{#paper-button raised=true classNames="md-primary" onClick=(action 'enableUser' user)}}Enable{{/paper-button}}
       {{/if}}
-      {{#paper-button classNames="md-secondary" action=(action 'hideUser' user)}}Hide{{/paper-button}}
+      {{#paper-button classNames="md-secondary" onClick=(action 'hideUser' user)}}Hide{{/paper-button}}
     {{/colour-paper-item}}
     {{paper-divider inset=true}}
   {{/each}}

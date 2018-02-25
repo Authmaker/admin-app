@@ -2,6 +2,8 @@
  @import 'margins';
  @import 'circles';
  @import 'buttons';
+ @import 'ember-power-datepicker';
+ @import 'date-picker';
 
  .menu-sidenav-toggle {
   font-size: 24px!important;
@@ -46,4 +48,8 @@ md-input-group input {
 
 .smaller-font {
   font-size: smaller;
+}
+
+md-dialog-content md-input-container {
+  width: 100%;
 }

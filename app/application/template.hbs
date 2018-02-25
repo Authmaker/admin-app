@@ -1,7 +1,10 @@
-{{#paper-nav-container open=drawerOpen classNames="ember-app"}}
+{{notification-container}}
 
-  {{#paper-sidenav classNames="md-sidenav-left md-whiteframe-z2" flex-layout="column" flex=true}}
-
+{{#paper-sidenav-container class="inner-sidenav"}}
+  {{#paper-sidenav
+    class="md-whiteframe-z2"
+    open=drawerOpen
+    onToggle=(action (mut drawerOpen))}}
     {{#paper-toolbar}}
       <div class="md-toolbar-tools">
         <div class="logo">
@@ -12,23 +15,40 @@
 
     {{#paper-content}}
       {{#paper-list}}
-        {{#paper-item action=(action 'transitionTo' 'admin.enable') }}Enable Users{{/paper-item}}
-        {{#paper-item action=(action 'transitionTo' 'admin.view') }}View Users{{/paper-item}}
-        {{#paper-item action=(action 'transitionTo' 'plans') }}Plans{{/paper-item}}
-        {{#paper-item action=(action 'transitionTo' 'scopes') }}Permissions{{/paper-item}}
-        {{#paper-item action=(action 'transitionTo' 'accounts') }}Accounts{{/paper-item}}
-      {{/paper-list}}  
+        {{#submenu-item active=(is-active "admin.enable" currentRouteName) href=(href-to "admin.enable")}}
+          Enable Users
+        {{/submenu-item}}
+        {{#submenu-item active=(is-active "admin.view" currentRouteName) href=(href-to "admin.view")}}
+          View Users
+        {{/submenu-item}}
+        {{#submenu-item active=(is-active "admin.plans" currentRouteName) href=(href-to "admin.plans")}}
+          Plans
+        {{/submenu-item}}
+        {{#submenu-item active=(is-active "admin.scopes" currentRouteName) href=(href-to "admin.scopes")}}
+          Permissions
+        {{/submenu-item}}
+        {{#submenu-item active=(is-active "admin.accounts" currentRouteName) href=(href-to "admin.accounts")}}
+          Accounts
+        {{/submenu-item}}
+      {{/paper-list}}
     {{/paper-content}}
   {{/paper-sidenav}}
 
-  {{#paper-content flex-layout="column" flex=true}}
+  {{#paper-card-content class="flex"}}
+    {{#paper-toolbar as |toolbar|}}
+      {{#paper-toolbar-tools}}
+        {{#paper-sidenav-toggle as |toggleAction|}}
+          {{#paper-button class="hide-gt-sm" onClick=(action toggleAction) iconButton=true}}
+            {{paper-icon "menu"}}
+          {{/paper-button}}
+        {{/paper-sidenav-toggle}}
+
+        <h2>Admin</h2> <div id="title"></div>
+        <span class="flex"></span>
+        <div id="tools"></div>
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
     {{outlet}}
-  {{/paper-content}}
+  {{/paper-card-content}}
 
-  <div class="c-notification__container">
-      {{#each notifications as |notification|}}
-          {{notification-message notification=notification}}
-      {{/each}}
-  </div>
-
-{{/paper-nav-container}}
+{{/paper-sidenav-container}}

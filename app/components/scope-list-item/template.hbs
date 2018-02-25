@@ -1,9 +1,8 @@
 {{#colour-paper-item title=scope.name}}
   <h3>{{scope.name}}
-    {{#if scope.paidFor}}{{paper-icon icon="shopping-cart"}}{{/if}}
-    {{#if editable}}
-      <a href="javascript:void()" {{action attrs.editScope}} >{{paper-icon icon="edit" size=1}}</a>
-    {{/if}}
+    {{#if scope.isPaidFor}}{{paper-icon "shopping-cart"}}{{/if}}
+
+    {{#paper-button iconButton=true onClick=(action attrs.editScope)}}{{paper-icon "edit"}}{{/paper-button}}
   </h3>
   <p>
     {{scope.description}}

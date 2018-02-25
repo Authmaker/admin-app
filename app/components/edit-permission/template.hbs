@@ -1,0 +1,30 @@
+{{#paper-dialog class="flex-50" onClose=(action attrs.cancel) clickOutsideToClose=true}}
+  <form>
+    {{#paper-toolbar}}
+      {{#paper-toolbar-tools}}
+        <h2>{{title}}</h2>
+        <span class="flex"></span>
+        {{#paper-button iconButton=true onClick=(action attrs.cancel)}}{{paper-icon icon="close"}}{{/paper-button}}
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+
+    {{#paper-dialog-content}}
+      <div class="layout layout-column layout-gt-sm-row layout-align-space-between-center">
+        {{paper-input label="Name" value=model.name onChange=(action (mut model.name))}}
+        {{paper-input label="Scope Code" value=model.scope onChange=(action (mut model.scope))}}
+      </div>
+      {{paper-input label="Description" value=model.description onChange=(action (mut model.description))}}
+      {{#paper-checkbox value=model.isPaidFor onChange=(action (mut model.isPaidFor))}}
+        Is a 'paid for' permission
+      {{/paper-checkbox}}
+    {{/paper-dialog-content}}
+
+    {{#paper-dialog-actions class="layout-row"}}
+      <span class="flex"></span>
+      {{#if attrs.delete}}
+        {{#paper-button classNames="md-warn" onClick=(action attrs.delete)}}<small>delete</small>{{/paper-button}}
+      {{/if}}
+      {{paper-button raised=true label="Save" classNames="md-primary" onClick=(action attrs.save)}}
+    {{/paper-dialog-actions}}
+  </form>
+{{/paper-dialog}}

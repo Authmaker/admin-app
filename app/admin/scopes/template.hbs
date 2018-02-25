@@ -1,0 +1,13 @@
+{{#ember-wormhole to="title"}}&nbsp;- Permissions{{/ember-wormhole}}
+
+{{#paper-list}}
+  {{#each model as |scope|}}
+    {{scope-list-item scope=scope editScope=(action 'editScope' scope)}}
+  {{/each}}
+{{/paper-list}}
+
+{{#paper-button raised=true fab=true iconButton=true classNames="md-primary bottom-right-button" onClick=(action "createScope")}}
+  {{paper-icon "add"}}
+{{/paper-button}}
+
+{{outlet}}
