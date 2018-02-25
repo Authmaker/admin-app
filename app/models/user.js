@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import { get, computed } from '@ember/object';
 
 export default DS.Model.extend({
   displayName: DS.attr('string'),
@@ -14,13 +15,17 @@ export default DS.Model.extend({
 
   gravatarHash: DS.attr('string'),
 
-  confirmationSent: Ember.computed('sentEmails.@each', function(){
+  confirmationSent: computed('sentEmails.@each', function(){
     return this.get('sentEmails').any(function(email){
       return email.reference === 'confirmation';
     });
   }),
 
-  hasImage: Ember.computed('gravatarHash', function(){
+  gravatarUrl: computed('gravatarHash', function() {
+    return `https://www.gravatar.com/avatar/${get(this, 'gravatarHash')}`
+  }),
+
+  hasImage: computed('gravatarHash', function(){
 
     var promise = new Ember.RSVP.Promise((resolve) => {
       if(!this.get('gravatarHash')){
@@ -41,7 +46,7 @@ export default DS.Model.extend({
 
   }),
 
-  title: Ember.computed('username', 'displayName', function(){
+  title: computed('username', 'displayName', function(){
     return this.get('displayName') || this.get('username');
   })
 });

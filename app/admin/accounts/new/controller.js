@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Controller, { inject as controller } from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { get } from '@ember/object';
@@ -16,21 +15,6 @@ export default Controller.extend({
   actions: {
     cancel() {
       this.transitionToRoute('admin.accounts');
-    },
-    addPlan(plan){
-      this.set('model.plan', plan);
-    },
-
-    removePlan(){
-      this.set('model.plan', null);
-    },
-
-    addUser(user){
-      this.get('model.users').addObject(user);
-    },
-
-    removeUser(user){
-      this.get('model.users').removeObject(user);
     },
 
     save(){
