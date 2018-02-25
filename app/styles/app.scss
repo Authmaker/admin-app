@@ -47,3 +47,7 @@ md-input-group input {
 .smaller-font {
   font-size: smaller;
 }
+
+md-dialog-content md-input-container {
+  width: 100%;
+}

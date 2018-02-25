@@ -9,9 +9,11 @@
     {{/paper-toolbar}}
 
     {{#paper-dialog-content}}
-      {{paper-input label="Name" value=model.name onChange=(action (mut model.name))}}
+      <div class="layout layout-column layout-gt-sm-row layout-align-space-between-center">
+        {{paper-input label="Name" value=model.name onChange=(action (mut model.name))}}
+        {{paper-input label="Scope Code" value=model.scope onChange=(action (mut model.scope))}}
+      </div>
       {{paper-input label="Description" value=model.description onChange=(action (mut model.description))}}
-      {{paper-input label="Scope Code" value=model.scope onChange=(action (mut model.scope))}}
       {{#paper-checkbox value=model.isPaidFor onChange=(action (mut model.isPaidFor))}}
         Is a 'paid for' permission
       {{/paper-checkbox}}
