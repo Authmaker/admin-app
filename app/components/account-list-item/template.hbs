@@ -1,19 +1,31 @@
-{{#colour-paper-item title=title gravatarHash=sortedUsers.firstObject.gravatarHash hasImage=sortedUsers.firstObject.hasImage class="margin-xl"}}
+{{#colour-paper-item
+  title=title
+  gravatarHash=sortedUsers.firstObject.gravatarHash
+  hasImage=sortedUsers.firstObject.hasImage
+  class="margin-xl"}}
 
   <h3>
     {{account.name}}
-    <a href="javascript:void()" {{action attrs.editAccount}} >{{paper-icon icon="edit" size=1}}</a>
+    {{#if editable}}
+      {{#paper-button iconButton=true onClick=(action attrs.editAccount)}}{{paper-icon "edit"}}{{/paper-button}}
+    {{/if}}
   </h3>
 
-  <p>
-    {{#paper-chips readOnly=true content=account.planArray as |plan|}}
-      <span>{{plan.name}}</span>
-    {{/paper-chips}}
-  </p>
-  <p>
-    {{#paper-chips readOnly=true content=sortedUsers as |user|}}
-      {{user.username}}
-    {{/paper-chips}}
-  </p>
+  {{#paper-chips
+    readOnly=true
+    content=(array account.plan)
+    as |plan|}}
+    <span>{{#link-to 'admin.plans.edit' plan.id}}{{plan.name}}{{/link-to}}</span>
+  {{/paper-chips}}
 
+  {{#paper-chips
+    readOnly=true
+    content=sortedUsers as |user|}}
+    {{#if user.displayName}}
+      {{user.displayName}} &lt;{{user.email}}&gt;
+    {{else}}
+      {{user.email}}
+    {{/if}}
+  {{/paper-chips}}
+  Expires {{moment-from-now account.expiry}}
 {{/colour-paper-item}}

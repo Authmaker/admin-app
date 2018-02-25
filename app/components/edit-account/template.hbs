@@ -1,0 +1,111 @@
+{{#paper-dialog class="flex-gt-sm-50 flex-sm-70 flex-xs-90" onClose=(action attrs.cancel) clickOutsideToClose=true}}
+
+    {{#paper-toolbar}}
+      {{#paper-toolbar-tools}}
+        <h2>{{title}}</h2>
+        <span class="flex"></span>
+        {{#paper-button iconButton=true onClick=(action attrs.cancel)}}{{paper-icon icon="close"}}{{/paper-button}}
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+
+    {{#paper-dialog-content}}
+      <div class="layout layout-column layout-gt-sm-row layout-align-space-between-center">
+        {{paper-input class="flex-gt-sm-50" label="Name" value=model.name onChange=(action (mut model.name))}}
+
+        {{#power-datepicker
+          selected=model.expiry
+          onSelect=(action (mut model.expiry)
+          value="date")
+          as |dp|}}
+
+          <md-input-container class="{{if model.expiry 'md-input-has-value'}}">
+            <label>Date</label>
+            <input
+              type="text"
+              class="md-input"
+              readonly
+              value={{compute dp.helpers.format-date}}
+              data-ebd-id="{{dp.uniqueId}}-trigger"
+              onclick={{dp.actions.open}}>
+            <div class="md-errors-spacer"></div>
+            <button onclick={{dp.actions.open}}
+              aria-controls="ember-basic-dropdown-content-{{dp.uniqueId}}"
+              class="md-datepicker-triangle-button md-icon-button md-button">
+              <div class="md-datepicker-expand-triangle"></div>
+            </button>
+
+          </md-input-container>
+
+
+          {{#dp.content class="material-datepicker-theme"}}
+            {{dp.nav}}
+            {{dp.days weekdayFormat="min" minDate=(moment)}}
+          {{/dp.content}}
+        {{/power-datepicker}}
+      </div>
+
+      {{#paper-autocomplete
+        class="flex-gt-sm-50"
+        required=true
+        triggerClass="flex"
+        selected=model.plan
+        options=plans
+        searchField="name"
+        labelPath="name"
+        label="Plan"
+        allowClear=true
+        loadingMessage="Searching countries..."
+        noMatchesMessage="Oops this country doesn't exist."
+        onSelectionChange=(action (mut model.plan))
+        as |plan select|}}
+        {{paper-autocomplete-highlight
+          label=plan.name
+          searchText=select.searchText
+          flags="i"}}
+      {{/paper-autocomplete}}
+
+      {{!-- <h4 class="margin-sm">Expiry:</h4>
+      {{view "select" content=numbers value=selectedNumber}}
+      {{view "select" content=timePeriods value=selectedTimePeriod}} --}}
+
+
+      {{!-- {{#if model.plan}}
+        {{#paper-button classNames="md-primary" onClick=(action "removePlan")}}<small>remove</small>{{/paper-button}}
+        {{plan-list-item plan=model.plan}}
+      {{else}}
+        <h3 class="margin-sm">Choose Plan:</h3>
+        {{#paper-list}}
+          {{#each availablePlans as |plan|}}
+            <a {{action 'addPlan' plan}}>
+              {{plan-list-item plan=plan}}
+            </a>
+          {{/each}}
+        {{/paper-list}}
+      {{/if}} --}}
+
+      <h3 class="margin-sm">Users:</h3>
+      {{#paper-chips
+        options=availableUsers
+        searchField="email"
+        placeholder="Add Users"
+        content=model.users
+        removeItem=(action "removeUser")
+        addItem=(action "addUser")
+        as |user|}}
+        {{#if user.displayName}}
+          <strong>{{user.displayName}}</strong>
+          <em>({{user.email}})</em>
+        {{else}}
+          <span>{{user.email}}</span>
+        {{/if}}
+      {{/paper-chips}}
+    {{/paper-dialog-content}}
+
+    {{#paper-dialog-actions class="layout-row"}}
+      <span class="flex"></span>
+      {{#if attrs.delete}}
+        {{#paper-button classNames="md-warn" onClick=(action attrs.delete)}}<small>delete</small>{{/paper-button}}
+      {{/if}}
+      {{paper-button raised=true label="Save" classNames="md-primary" onClick=(action attrs.save)}}
+    {{/paper-dialog-actions}}
+{{/paper-dialog}}

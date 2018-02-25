@@ -1,29 +1,22 @@
-import Ember from 'ember';
 import moment from 'moment';
+import Controller, { inject as controller } from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
+  accountsController: controller('admin.accounts'),
+  notifications: service('notification-messages'),
 
-  selectedNumber: 1,
-  selectedTimePeriod: 'year',
-
-  numbers: [1,2,3,4],
-  timePeriods: ['day', 'week', 'month', 'year'],
-
-  allPlans: Ember.computed(function(){
-    return this.store.findAll('plan');
-  }),
-
-  availablePlans: Ember.computed('model.plan', 'allPlans.@each', function(){
-    return this.get('allPlans').without(this.get('model.plan'));
-  }),
-
-  allUsers: Ember.computed(function(){
-    return this.store.findAll('user');
-  }),
-
-  availableUsers: Ember.computed.setDiff('allUsers', 'model.users'),
+  // allUsers: computed(function(){
+  //   return this.store.findAll('user');
+  // }),
+  //
+  // availableUsers: computed.setDiff('allUsers', 'model.users'),
 
   actions: {
+    cancel() {
+      this.transitionToRoute('admin.accounts');
+    },
     addPlan(plan){
       this.set('model.plan', plan);
     },
@@ -41,22 +34,15 @@ export default Ember.Controller.extend({
     },
 
     save(){
-
-      this.set('model.planExpiryDate', moment().add(this.get('selectedNumber'), this.get('selectedTimePeriod')).toDate());
-
       this.store.createRecord('account', this.get('model')).save().then(() => {
-        this.notifications.addNotification({
-          type: 'success',
+        get(this, 'notifications').success('Account created successfully', {
           autoClear: true,
-          message: 'Account created successfully'
         });
+
+        this.transitionToRoute('admin.accounts');
       }, (err) => {
-        this.notifications.addNotification({
-          type: 'error',
-          message: `Error while creating account ${err.responseText || err.message || err}`
-        });
+        get(this, 'notifications').error(`Error while creating account ${err.responseText || err.message || err}`);
       });
-      this.transitionToRoute('accounts');
     }
   }
 });

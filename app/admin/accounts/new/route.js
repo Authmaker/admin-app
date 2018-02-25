@@ -5,11 +5,5 @@ export default Ember.Route.extend({
     return {
       users: []
     };
-  },
-
-  actions: {
-    willTransition: function() {
-      this.modelFor(this.routeName).rollbackAttributes();
-    }
   }
 });

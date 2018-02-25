@@ -1,8 +1,8 @@
 {{#ember-wormhole to="title"}}&nbsp;- Accounts{{/ember-wormhole}}
 
 {{#paper-list}}
-  {{#each model as |account|}}
-    {{account-list-item account=account editAccount=(action 'editAccount' account)}}
+  {{#each model.accounts as |account|}}
+    {{account-list-item account=account editable=true editAccount=(action 'editAccount' account)}}
   {{/each}}
 {{/paper-list}}
 
