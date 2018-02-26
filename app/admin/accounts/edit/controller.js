@@ -1,57 +1,38 @@
-import AccountCreateController from '@authmaker/admin-app/accounts/new/controller';
-import moment from 'moment';
+import Controller, { inject as controller } from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-export default AccountCreateController.extend({
+export default Controller.extend({
+  accountsController: controller('admin.accounts'),
+  notifications: service('notification-messages'),
 
   actions: {
-    setEditExpiry(value){
-      this.set('editExpiry', value);
+    cancel() {
+      this.transitionToRoute('admin.accounts');
     },
-
     save(){
-
-      if(!this.get('model.planExpiryDate') || this.get('editExpiry')){
-        this.set('model.planExpiryDate', moment().add(this.get('selectedNumber'), this.get('selectedTimePeriod')).toDate());
-        this.set('editExpiry', false);
-      }
-
-      this.get('model').save().then(() => {
-        this.notifications.addNotification({
-          type: 'success',
+      get(this, 'model').save().then(() => {
+        get(this, 'notifications').success('Account updated successfully', {
           autoClear: true,
-          message: 'Account updated successfully'
         });
+
+        this.transitionToRoute('admin.accounts');
       }, (err) => {
-        this.notifications.addNotification({
-          type: 'error',
-          message: `Error while updating account ${err.responseText || err.message || err}`
-        });
+        get(this, 'notifications').error(`Error while updating account ${err.responseText || err.message || err}`);
       });
-      this.transitionToRoute('accounts');
     },
-
     delete(){
-      this.get('model').deleteRecord();
-
       if(window.confirm("Are you sure you want to delete this account?")){
-        this.get('model').save().then(() => {
-          this.notifications.addNotification({
-            type: 'success',
+        get(this, 'model').destroyRecord().then(() => {
+          get(this, 'notifications').success('Account deleted successfully', {
             autoClear: true,
-            message: 'Account deleted successfully'
           });
-        }, (err) => {
-          this.notifications.addNotification({
-            type: 'error',
-            message: `Error while deleting account ${err.responseText || err.message || err}`
-          });
-        });
 
-        this.transitionToRoute('accounts');
-      } else {
-        this.get('model').rollbackAttributes();
-        this.transitionToRoute('accounts');
+          this.transitionToRoute('admin.accounts');
+        }, (err) => {
+          get(this, 'notifications').error(`Error while deleting account ${err.responseText || err.message || err}`);
+        });
       }
-    }
+    },
   }
 });

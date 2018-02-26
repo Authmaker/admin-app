@@ -1,55 +1,9 @@
-{{#paper-dialog title="Edit Account" close="cancel" classNames="edit-dialog"}}
-  <md-dialog-content>
-    {{paper-text label="Name" value=model.name}}
-    <h4 class="margin-sm">Expiry:</h4>
-    {{#if model.planExpiryDate}}
-      {{#if editExpiry}}
-        {{view "select" content=numbers value=selectedNumber}}
-        {{view "select" content=timePeriods value=selectedTimePeriod}}
-      {{else}}
-        {{ago model.planExpiryDate}} <a {{action (action 'setEditExpiry' true)}}>{{paper-icon icon="cancel"}}</a>
-      {{/if}}
-    {{else}}
-      {{view "select" content=numbers value=selectedNumber}}
-      {{view "select" content=timePeriods value=selectedTimePeriod}}
-    {{/if}}
-    <h3 class="margin-sm">Plan:</h3>
-    {{#if model.plan}}
-      {{#paper-button classNames="md-primary" onClick=(action "removePlan")}}<small>remove</small>{{/paper-button}}
-      {{plan-list-item plan=model.plan}}
-    {{else}}
-      <h3 class="margin-sm">Choose Plan:</h3>
-      {{#paper-list}}
-        {{#each availablePlans as |plan|}}
-          <a {{action 'addPlan' plan}}>
-            {{plan-list-item plan=plan}}
-          </a>
-        {{/each}}
-      {{/paper-list}}
-    {{/if}}
-
-    <h3 class="margin-sm">Users:</h3>
-    {{#paper-chips readOnly=false removeItem="removeUser" content=model.users as |user|}}
-      {{#if user.name}}
-        <strong>{{user.name}}</strong>
-        <em>({{user.username}})</em>
-      {{else}}
-        <span>{{user.username}}</span>
-      {{/if}}
-    {{/paper-chips}}
-
-    <h3 class="margin-sm">Choose Users:</h3>
-    {{#paper-list}}
-      {{#each availableUsers as |user|}}
-        <a {{action 'addUser' user}}>
-          {{colour-paper-item title=user.username gravatarHash=user.gravatarHash}}
-        </a>
-      {{/each}}
-    {{/paper-list}}
-  </md-dialog-content>
-
-  <div class="md-actions" layout="row">
-    {{#paper-button classNames="md-warn" onClick=(action "delete")}}<small>delete</small>{{/paper-button}}
-    {{paper-button raised=true label="Save" classNames="md-primary" onClick=(action "save")}}
-  </div>
-{{/paper-dialog}}
+{{edit-account
+  title="Edit Account"
+  model=model
+  plans=accountsController.model.plans
+  users=accountsController.model.users
+  cancel=(action 'cancel')
+  save=(action 'save')
+  delete=(action 'delete')
+}}

@@ -89,6 +89,8 @@
         searchField="email"
         placeholder="Add Users"
         content=model.users
+        nameField='displayName'
+        imageField='gravatarUrl'
         removeItem=(action "removeUser")
         addItem=(action "addUser")
         as |user|}}
