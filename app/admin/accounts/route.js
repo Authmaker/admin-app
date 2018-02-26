@@ -6,6 +6,7 @@ export default Route.extend({
     return hash({
       plans: this.store.findAll('plan'),
       accounts: this.store.findAll('account'),
+      users: this.store.query('user', {enabled: true}),
     });
   },
 });

@@ -84,8 +84,8 @@
       {{/if}} --}}
 
       <h3 class="margin-sm">Users:</h3>
-      {{#paper-contact-chips
-        search=(action 'searchUsers')
+      {{#paper-chips
+        options=availableUsers
         searchField="email"
         placeholder="Add Users"
         content=model.users
@@ -100,7 +100,7 @@
         {{else}}
           <span>{{user.email}}</span>
         {{/if}}
-      {{/paper-contact-chips}}
+      {{/paper-chips}}
     {{/paper-dialog-content}}
 
     {{#paper-dialog-actions class="layout-row"}}
