@@ -1,6 +1,6 @@
 {{notification-container}}
 
-{{#paper-sidenav-container class="inner-sidenav"}}
+{{#paper-sidenav-container class="site-nav-container"}}
   {{#paper-sidenav
     class="md-whiteframe-z2"
     open=drawerOpen
@@ -34,9 +34,10 @@
     {{/paper-content}}
   {{/paper-sidenav}}
 
-  {{#paper-card-content class="flex"}}
+<div id="main" class="flex layout-column">
+
     {{#paper-toolbar as |toolbar|}}
-      {{#paper-toolbar-tools}}
+      {{#toolbar.tools}}
         {{#paper-sidenav-toggle as |toggleAction|}}
           {{#paper-button class="hide-gt-sm" onClick=(action toggleAction) iconButton=true}}
             {{paper-icon "menu"}}
@@ -46,9 +47,13 @@
         <h2>Admin</h2> <div id="title"></div>
         <span class="flex"></span>
         <div id="tools"></div>
-      {{/paper-toolbar-tools}}
+      {{/toolbar.tools}}
     {{/paper-toolbar}}
-    {{outlet}}
-  {{/paper-card-content}}
+
+    {{#paper-content}}
+      {{outlet}}
+    {{/paper-content}}
+
+</div>
 
 {{/paper-sidenav-container}}
