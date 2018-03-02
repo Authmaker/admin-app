@@ -1,31 +1,52 @@
-{{#colour-paper-item
-  title=title
-  gravatarHash=sortedUsers.firstObject.gravatarHash
-  hasImage=sortedUsers.firstObject.hasImage
-  class="margin-xl"}}
 
-  <h3>
-    {{account.name}}
-    {{#if editable}}
-      {{#paper-button iconButton=true onClick=(action attrs.editAccount)}}{{paper-icon "edit"}}{{/paper-button}}
-    {{/if}}
-  </h3>
+{{#paper-item class="md-padding"}}
 
-  {{#paper-chips
-    readOnly=true
-    content=(array account.plan)
-    as |plan|}}
-    <span>{{#link-to 'admin.plans.edit' plan.id}}{{plan.name}}{{/link-to}}</span>
-  {{/paper-chips}}
+  <div class="layout-column flex">
 
-  {{#paper-chips
-    readOnly=true
-    content=sortedUsers as |user|}}
-    {{#if user.displayName}}
-      {{user.displayName}} &lt;{{user.email}}&gt;
-    {{else}}
-      {{user.email}}
-    {{/if}}
-  {{/paper-chips}}
-  Expires {{moment-from-now account.expiry}}
-{{/colour-paper-item}}
+    <div class="layout-row">
+      {{colour-avatar-icon title=account.name}}
+      <h3>
+        {{account.name}}
+        {{#if editable}}
+          {{#paper-button iconButton=true onClick=(action attrs.editAccount)}}{{paper-icon "edit"}}{{/paper-button}}
+        {{/if}}
+      </h3>
+    </div>
+
+    <div class="account-summary md-padding">
+
+      <div class="account-details">
+        <h5 class="details-label">Plan:</h5>
+        {{#paper-chips
+          readOnly=true
+          content=(array account.plan)
+          as |plan|}}
+          <span>{{#link-to 'admin.plans.edit' plan.id}}{{plan.name}}{{/link-to}}</span>
+        {{/paper-chips}}
+      </div>
+
+
+      <div class="account-details">
+        <h5 class="details-label">Users:</h5>
+        {{#paper-chips
+          readOnly=true
+          content=sortedUsers as |user|}}
+          {{#if user.displayName}}
+            {{user.displayName}} &lt;{{user.email}}&gt;
+          {{else}}
+            {{user.email}}
+          {{/if}}
+        {{/paper-chips}}
+      </div>
+
+
+      <div class="account-details layout-row layout-align-start-center">
+        <h5 class="details-label">Expiry:</h5>
+        <span>Expires {{moment-from-now account.expiry}}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+{{/paper-item}}

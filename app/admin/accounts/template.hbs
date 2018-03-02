@@ -3,6 +3,7 @@
 {{#paper-list}}
   {{#each model.accounts as |account|}}
     {{account-list-item account=account editable=true editAccount=(action 'editAccount' account)}}
+    {{paper-divider}}
   {{/each}}
 {{/paper-list}}
 

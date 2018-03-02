@@ -72,3 +72,21 @@ md-input-group input {
 md-dialog-content md-input-container {
   width: 100%;
 }
+
+.account-summary {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .account-details {
+    padding-top: 8px;
+
+    &:last-child {
+      padding-bottom: 8px;
+    }
+  }
+
+  .details-label {
+    margin: 0;
+    margin-right: 1em;
+  }
+}
