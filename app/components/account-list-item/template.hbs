@@ -1,19 +1,22 @@
+{{#paper-card as |card|}}
+  {{#card.header as |header|}}
+    {{#header.avatar}}
+      {{#unless image}}
+        <div class="circle circle--text circle--{{firstLetter}} md-icon">{{firstLetter}}</div>
+      {{else}}
+        <img src="https://www.gravatar.com/avatar/{{image}}" class="md-avatar">
+      {{/unless}}
+    {{/header.avatar}}
+    {{#header.text as |text|}}
+      {{#text.title}}{{account.name}}{{#if editable}}
+        {{#paper-button iconButton=true onClick=(action attrs.editAccount)}}{{paper-icon "edit"}}{{/paper-button}}
+      {{/if}}{{/text.title}}
 
-{{#paper-item class="md-padding"}}
+    {{/header.text}}
+  {{/card.header}}
 
-  <div class="layout-column flex">
-
-    <div class="layout-row">
-      {{colour-avatar-icon title=account.name}}
-      <h3>
-        {{account.name}}
-        {{#if editable}}
-          {{#paper-button iconButton=true onClick=(action attrs.editAccount)}}{{paper-icon "edit"}}{{/paper-button}}
-        {{/if}}
-      </h3>
-    </div>
-
-    <div class="account-summary md-padding">
+  {{#card.content}}
+    <div class="account-summary">
 
       <div class="account-details">
         <h5 class="details-label">Plan:</h5>
@@ -30,7 +33,7 @@
         <h5 class="details-label">Users:</h5>
         {{#paper-chips
           readOnly=true
-          content=sortedUsers as |user|}}
+          content=account.users as |user|}}
           {{#if user.displayName}}
             {{user.displayName}} &lt;{{user.email}}&gt;
           {{else}}
@@ -47,6 +50,5 @@
 
     </div>
 
-  </div>
-
-{{/paper-item}}
+  {{/card.content}}
+{{/paper-card}}
