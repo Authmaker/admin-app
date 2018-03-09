@@ -1,10 +1,12 @@
 {{#ember-wormhole to="title"}}&nbsp;- Accounts{{/ember-wormhole}}
 
-{{#paper-list}}
+<div class="flex layout-row layout-wrap layout-xs-column">
   {{#each model.accounts as |account|}}
-    {{account-list-item account=account editable=true editAccount=(action 'editAccount' account)}}
+    <div class="flex-100 flex-md-50 flex-gt-md-25">
+      {{account-list-item account=account editable=true editAccount=(action 'editAccount' account)}}
+    </div>
   {{/each}}
-{{/paper-list}}
+</div>
 
 {{#paper-button raised=true fab=true iconButton=true classNames="md-primary bottom-right-button" onClick=(action "createAccount")}}
   {{paper-icon "add"}}

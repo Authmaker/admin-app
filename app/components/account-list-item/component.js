@@ -1,15 +1,25 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get, set, computed } from '@ember/object';
+import $ from 'jquery';
 
-export default Ember.Component.extend({
+export default Component.extend({
+  init() {
+    get(this, 'account.users').then((users) => {
+      $.ajax({
+        url: `https://en.gravatar.com/${get(users, 'firstObject.gravatarHash')}.json`,
+        dataType: 'jsonp'
+      }).then(() => {
+        set(this, 'image', get(users, 'firstObject.gravatarHash'));
+      });
+    })
 
-  sortProperties: ['hasImage:desc',  'username:asc'],
-  sortedUsers: Ember.computed.sort('account.users', 'sortProperties'),
+    this._super(...arguments);
+  },
 
-  title: Ember.computed('account.name', 'account.users.@each.username', function(){
-    if(this.get('account.name')){
-      return this.get('account.name');
+  firstLetter: computed('account.name', function(){
+    if(!this.get('account.name')){
+      return;
     }
-
-    return this.get('sortedUsers.firstObject.username');
-  })
+    return this.get('account.name').capitalize().slice(0,1);
+  }),
 });

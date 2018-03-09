@@ -15,6 +15,17 @@
   font-size: larger;
 }
 
+
+md-card-avatar .circle {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+
+md-card-avatar .circle--text {
+  line-height: 40px;
+}
+
 $alphabet: (
   'A': 'red',
   'B': 'pink',
@@ -48,4 +59,8 @@ $alphabet: (
   .circle--#{$letter}{
     background: color($color, '200');
   }
+}
+
+md-card-avatar .md-avatar {
+  border-radius: 50%;
 }
