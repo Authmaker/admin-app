@@ -11,8 +11,29 @@
     {{#paper-dialog-content}}
       <div class="layout layout-column layout-gt-sm-row layout-align-space-between-center">
         {{paper-input class="flex-gt-sm-30" label="Name" value=model.name onChange=(action (mut model.name))}}
-        {{paper-input class="flex-gt-sm-30" label="Stripe Plan" value=model.stripePlan onChange=(action (mut model.stripePlan))}}
-        {{#paper-checkbox class="flex-gt-sm-30" value=model.newSubscriptions onChange=(action (mut model.newSubscriptions))}}
+        {{#paper-select
+            label="Stripe Plan"
+            class="flex-gt-sm-30"
+            options=stripePlans
+            selected=model.stripePlan
+            onChange=(action (mut model.stripePlan))
+            as |plan|}}
+            {{stripe-plan-summary plan=plan}}
+          {{/paper-select}}
+        <div style="padding-bottom: 16px;" class="hide-sm hide-xs">
+          {{#paper-button iconButton=true id='create-plan-icon' target="_blank" href="https://dashboard.stripe.com/subscriptions/products"}}
+            {{paper-icon "open-in-new"}}
+          {{/paper-button}}
+          <span class="hide-gt-sm">Create New Plan</span>
+          {{ember-tooltip class="hide-sm" targetId='create-plan-icon' text="Create new plan"}}
+        </div>
+
+        <div style="padding-bottom: 16px;" class="hide-gt-sm">
+          {{#paper-button target="_blank" href="https://dashboard.stripe.com/subscriptions/products"}}
+            {{paper-icon "open-in-new"}} Create New Plan
+          {{/paper-button}}
+        </div>
+        {{#paper-checkbox class="flex-gt-sm-30" value=model.allowSubscriptions onChange=(action (mut model.allowSubscriptions))}}
           Allow new subscriptions
         {{/paper-checkbox}}
       </div>

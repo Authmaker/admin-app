@@ -1,5 +1,9 @@
 {{#colour-paper-item title=plan.name class="margin-xl"}}
-  <h3 class="margin-sm">{{plan.name}}
+  <h3 class="margin-sm">
+    {{plan.name}}
+    {{#if plan.stripePlan}}
+      ({{stripe-plan-summary plan=plan.stripePlan}})
+    {{/if}}
     {{#if editable}}
       {{#paper-button iconButton=true onClick=(action attrs.editPlan)}}{{paper-icon "edit"}}{{/paper-button}}
     {{/if}}
